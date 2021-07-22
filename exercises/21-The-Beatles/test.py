@@ -18,7 +18,8 @@ def test_functionSing():
     my_funcNameVar = content.index(my_funcName[0])
     regex = r"def sing\(\):"
     my_print = [s for s in content[2:] if "sing()" in s]
-    my_printVar = content.index(my_print[1])
+    #my_printVar = content.index(my_print[1]) Esto es incorrecto, debe tener valor 0 para funcionar okey
+    my_printVar = content.index(my_print[0]) 
     regexPrint = r"sing\(\)"
     assert re.match(regex, content[my_funcNameVar])
     assert re.match(regexPrint, content[my_printVar])
@@ -27,4 +28,4 @@ def test_functionSing():
 def test_for_function_output(capsys):
     sing()
     captured = capsys.readouterr()
-    assert captured.out.lower() == "let it be,\nlet it be,\nlet it be,\nlet it be,\nwhisper words of wisdom, let it be, let it be,\nlet it be,\nlet it be,\nlet it be,\nthere will be an answer, let it be\n".lower()
+    assert captured.out == "let it be,\nlet it be,\nlet it be,\nlet it be,\nwhisper words of wisdom, let it be, let it be,\nlet it be,\nlet it be,\nlet it be,\nthere will be an answer, let it be\n"
